@@ -18,7 +18,7 @@ concepts such as API-based ingestion, modular processing, logging and relational
 - Provide a clear and extendable project structure suitable for a public GitHub portfolio
 
 ## Project Structure
-
+```
 weather-data-pipeline/
 │
 ├── src/
@@ -36,7 +36,7 @@ weather-data-pipeline/
 ├── requirements.txt
 ├── README.md
 └── LICENSE
-
+```
 ## Methodology
 
 The project follows a structured, engineering-oriented workflow similar to small production
