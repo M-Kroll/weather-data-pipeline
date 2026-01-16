@@ -28,7 +28,8 @@ def validate_weather_data(df):
     Raises:
         ValueError: If critical schema checks fail
     """
-    logging.info("Starting data validation")
+    
+    logging.info("Starting validation module")
 
     # ==========================================================
     # Schema validation
@@ -113,5 +114,6 @@ def validate_weather_data(df):
         )
 
     logging.info("Time-series consistency checks completed")
-
+    logging.info("Finished validation module")
+    
     return df

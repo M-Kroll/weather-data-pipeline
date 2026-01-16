@@ -19,6 +19,8 @@ def fetch_weather_data():
     Returns:
         pandas.DataFrame: Hourly weather data
     """
+    
+    logging.info("Starting ingestion module")
     logging.info("Fetching weather data from Open-Meteo API")
 
     # Setup API client with caching and retry logic
@@ -65,6 +67,7 @@ def fetch_weather_data():
     df = pd.DataFrame(hourly_data)
 
     logging.info("Weather data converted to DataFrame")
-
+    logging.info("Finished ingestion module")
+    
     return df
 
