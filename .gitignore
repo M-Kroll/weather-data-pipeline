@@ -223,3 +223,6 @@ data/processed/*.db
 
 # Temporary test outputs
 tmp/
+
+# Local sqlite cache files
+.cache.sqlite
