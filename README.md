@@ -23,24 +23,25 @@ The focus is not on dataset size, but on reliability, transparency, and explicit
 ```
 weather-data-pipeline/
 │
-├── src/
+├── src/                     # Scripts for weather-data-pipeline
 │   ├── main.py              # Pipeline orchestration
 │   ├── ingestion.py         # Open-Meteo API data retrieval
 │   ├── validation.py        # Data quality and consistency checks
 │   ├── storage.py           # SQLite persistence layer
 │   └── logging_config.py    # Central logging configuration
 │
-├── data/
+├── data/                    # Datafiles and databases
 │   └── processed/           # Generated SQLite database
 │
 ├── logs/                    # Application logs
 │
-├── tests/
+├── tests/                   # Test scripts and quality files
 │   └── inspect_database.py  # Database inspection and sanity checks
 │
-├── requirements.txt
-├── README.md
-└── LICENSE
+├── requirements.txt         # Dependencies and requirements for the project
+├── .gitignore               # Files and directories to be ignored by Git
+├── README.md                # Project overview and instructions
+└── LICENSE                  # License information for the repository
 
 ```
 
@@ -141,13 +142,12 @@ py -m venv .venv
 ```
 3. Activate the virtual environment:
 
-3.1 Windows(PowerShell):
+- Windows (PowerShell):
 ```bash
 .\.venv\Scripts\Activate.ps1
 
 ```
-3.2 macOS / Linux:
-
+- macOS / Linux:
 ```bash
 source .venv/bin/activate
 
