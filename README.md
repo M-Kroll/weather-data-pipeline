@@ -72,9 +72,9 @@ At the current stage, foundational checks are implemented. The validation layer 
 
 ### Storage
 
-Validated data is persisted in a SQLite database. Tables are created automatically if they do not yet exist, allowing repeated executions without manual setup.
+Validated weather data is persisted in a SQLite database. Tables are created automatically if they do not yet exist, enabling repeated pipeline executions without manual intervention.
 
-SQLite was chosen to focus on schema design, idempotent writes, and reproducibility while avoiding infrastructure complexity. Known limitations regarding concurrency and scaling are accepted by design and documented.
+Row-wise inserts with INSERT OR IGNORE ensure idempotent writes, preventing duplicate entries even when the pipeline is run multiple times. SQLite was chosen to emphasize schema design, reproducibility, and lightweight setup, while limitations in concurrency and scaling are noted and accepted by design.
 
 ### Orchestration and Logging
 
@@ -113,7 +113,7 @@ A single entry point coordinates ingestion, validation, and storage. Centralized
 
 ## Project Status
 
-In progress. The project is intentionally developed incrementally. Core ingestion and orchestration are implemented; validation and persistence layers are designed for extension and currently contain foundational logic.
+In progress. The project is developed incrementally. Core ingestion is fully implemented and tested; validation now includes schema, plausibility, and time-series consistency checks, and storage persists data idempotently in SQLite.
 
 Planned extensions include:
 
@@ -122,6 +122,48 @@ Planned extensions include:
 - Scheduling for regular execution  
 - Migration to PostgreSQL or cloud-based storage  
 - Reimplementation using PySpark for larger-scale processing  
+
+---
+
+## Quickstart
+
+1. Clone the repository :
+```bash
+git clone https://github.com/M-Kroll/weather-data-pipeline
+cd weather-data-pipeline
+
+```
+
+2. Create a virtual environment:
+```bash
+py -m venv .venv
+
+```
+3. Activate the virtual environment:
+
+Windows(PowerShell):
+```bash
+.\.venv\Scripts\Activate.ps1
+
+```
+macOS / Linux:
+
+```bash
+source .venv/bin/activate
+
+```
+4. Install dependencies:
+```bash
+python.exe -m pip install --upgrade pip
+pip install -r requirements.txt
+
+```
+
+5. Run the pipeline
+```bash
+py src/main.py
+
+```
 
 ---
 
