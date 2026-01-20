@@ -81,6 +81,7 @@ def validate_weather_data(df):
         (df["wind_speed_10m"] <= 75)
     ]
 
+    # Log the number of removed rows
     removed_rows = initial_row_count - len(df)
 
     if removed_rows > 0:

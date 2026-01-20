@@ -23,7 +23,11 @@ def fetch_weather_data():
     logging.info("Starting ingestion module")
     logging.info("Fetching weather data from Open-Meteo API")
 
-    # Setup API client with caching and retry logic
+    # --------------------------------------------------
+    # Step 1: Setup API client and define request
+    # --------------------------------------------------
+
+    # Setup cached and retried session    
     cache_session = requests_cache.CachedSession(".cache", expire_after=-1)
     retry_session = retry(cache_session, retries=5, backoff_factor=0.2)
     openmeteo = openmeteo_requests.Client(session=retry_session)
@@ -43,14 +47,20 @@ def fetch_weather_data():
         ],
     }
 
+    # Make the API request
     responses = openmeteo.weather_api(url, params=params)
     response = responses[0]
 
     logging.info("Weather data successfully retrieved")
 
-    # Extract hourly data
+    # --------------------------------------------------
+    # Step 2: Extract hourly data and build DataFrame
+    # --------------------------------------------------
+
+    # Extract hourly data from API response
     hourly = response.Hourly()
 
+    # Build DataFrame from hourly data
     hourly_data = {
         "timestamp": pd.date_range(
             start=pd.to_datetime(hourly.Time(), unit="s", utc=True),
@@ -64,6 +74,7 @@ def fetch_weather_data():
         "wind_speed_10m": hourly.Variables(3).ValuesAsNumpy(),
     }
 
+    # Create DataFrame
     df = pd.DataFrame(hourly_data)
 
     logging.info("Weather data converted to DataFrame")

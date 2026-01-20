@@ -16,7 +16,16 @@ def setup_logging():
     - Creates a logs directory if it does not exist
     - Logs messages to both console and file
     """
+
+    # Ensure log directory exists
     os.makedirs("logs", exist_ok=True)
+
+    # Configure logging:
+    # - INFO level for general pipeline tracking
+    # - Custom format showing timestamp, level, and message
+    # - Handlers:
+    #   * FileHandler: write logs to a file for persistence and review
+    #   * StreamHandler: also display logs in the console for immediate feedback
 
     logging.basicConfig(
         level=logging.INFO,
